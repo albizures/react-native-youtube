@@ -60,6 +60,17 @@
 
     function onReady(event) {
         window.location.href = 'ytplayer://onReady?data=' + event.data;
+
+        try {
+            const levels = player.getAvailableQualityLevels();
+            if (levels.length > 0) {
+              player.setPlaybackQuality(levels[0]);
+            } else {
+              player.setPlaybackQuality('small');
+            }
+          } catch (error) {
+            player.setPlaybackQuality('small');
+          }
     }
 
     function onStateChange(event) {
